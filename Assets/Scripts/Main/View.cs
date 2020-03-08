@@ -13,10 +13,10 @@ namespace EZBall.Main
     {
         [SerializeField] Transform buttonLayout;
 
-        private IFactory<IPlanet, Transform, IObservable<IPlanet>> buttonFactory;
+        private MainButton.Factory buttonFactory;
 
         [Inject]
-        private void InjectMeWith(IFactory<IPlanet, Transform, IObservable<IPlanet>> buttonFactory)
+        private void InjectMeWith(MainButton.Factory buttonFactory)
         {
             this.buttonFactory = buttonFactory;
         }
@@ -40,7 +40,9 @@ namespace EZBall.Main
 
         internal IObservable<IPlanet> OnClick(IPlanet planet)
         {
-            return this.buttonFactory.Create(planet, buttonLayout);
+            return this.buttonFactory
+                .Create(planet.Name, buttonLayout)
+                .Select(_ => planet);
         }
     }
 }

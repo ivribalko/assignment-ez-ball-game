@@ -27,7 +27,10 @@ namespace EZBall.Main
 
         public void Hide()
         {
-            this.view.Value.Hide();
+            if (this.view.IsValueCreated)
+            {
+                this.view.Value.Hide();
+            }
         }
     }
 }
