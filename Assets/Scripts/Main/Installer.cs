@@ -3,7 +3,7 @@ using Zenject;
 
 namespace EZBall.Main
 {
-    public class Installer : Installer<Installer>
+    public sealed class Installer : Installer<Installer>
     {
         public override void InstallBindings()
         {

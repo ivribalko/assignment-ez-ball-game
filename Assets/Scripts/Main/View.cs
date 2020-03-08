@@ -5,16 +5,25 @@ using EZBall.Rife;
 using EZBall.Settings;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace EZBall.Main
 {
-    internal class View : MonoBehaviour, IView
+    internal sealed class View : MonoBehaviour, IView
     {
-        internal IObservable<IPlanet> OnClick(IEnumerable<IPlanet> planets)
+        [SerializeField] Transform buttonLayout;
+
+        private IFactory<IPlanet, Transform, IObservable<IPlanet>> buttonFactory;
+
+        [Inject]
+        private void InjectMeWith(IFactory<IPlanet, Transform, IObservable<IPlanet>> buttonFactory)
         {
-            return Observable
-                .Interval(TimeSpan.FromSeconds(3))
-                .Select(_ => planets.First());
+            this.buttonFactory = buttonFactory;
+        }
+
+        public void Show()
+        {
+            this.gameObject.SetActive(true);
         }
 
         public void Hide()
@@ -22,9 +31,16 @@ namespace EZBall.Main
             this.gameObject.SetActive(false);
         }
 
-        public void Show()
+        internal IObservable<IPlanet> OnClick(IEnumerable<IPlanet> planets)
         {
-            this.gameObject.SetActive(true);
+            return planets
+                .Select(OnClick)
+                .Merge();
+        }
+
+        internal IObservable<IPlanet> OnClick(IPlanet planet)
+        {
+            return this.buttonFactory.Create(planet, buttonLayout);
         }
     }
 }

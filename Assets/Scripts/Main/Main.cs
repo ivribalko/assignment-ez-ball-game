@@ -4,7 +4,7 @@ using EZBall.Settings;
 
 namespace EZBall.Main
 {
-    internal class Main : IMain
+    internal sealed class Main : IMain
     {
         private readonly Lazy<View> view;
         private readonly IEnumerable<IPlanet> planets;
