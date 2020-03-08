@@ -1,5 +1,4 @@
-using EZBall.Game;
-using EZBall.Main;
+using UnityEngine;
 using Zenject;
 
 namespace EZBall.Core
@@ -8,15 +7,16 @@ namespace EZBall.Core
     {
         public override void InstallBindings()
         {
-            this.Container
-                .Bind<IMain>()
-                .FromInstance(null);
+            Main.Installer.Install(this.Container);
 
-            this.Container
-                .Bind<IGame>()
-                .FromInstance(null);
+            Game.Installer.Install(this.Container);
 
             Settings.Installer.Install(this.Container);
+
+            this.Container
+                .Bind<Canvas>()
+                .FromComponentInHierarchy()
+                .AsSingle();
 
             this.Container
                 .Bind<Bootstrap>()

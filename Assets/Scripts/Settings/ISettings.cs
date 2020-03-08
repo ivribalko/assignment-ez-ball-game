@@ -7,6 +7,6 @@ namespace EZBall.Settings
     /// </summary>
     public interface ISettings
     {
-        IReadOnlyCollection<IPlanet> Planets { get; }
+        IEnumerable<IPlanet> Planets { get; }
     }
 }

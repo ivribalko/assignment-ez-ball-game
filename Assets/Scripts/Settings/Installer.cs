@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Zenject;
 
 namespace EZBall.Settings
@@ -10,6 +11,10 @@ namespace EZBall.Settings
                 .Bind<ISettings>()
                 .To<Settings>()
                 .AsSingle();
+
+            this.Container
+                .Bind<IEnumerable<IPlanet>>()
+                .FromResolveGetter<ISettings>(settings => settings.Planets);
         }
     }
 }
