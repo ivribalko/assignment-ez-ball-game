@@ -1,28 +1,28 @@
-using System;
-using EZBall.Settings;
-using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace EZBall.Game
 {
-    public class Installer : Installer<Installer>
+    public sealed class Installer : Installer<Installer>
     {
         public override void InstallBindings()
         {
             this.Container
-                .Bind<IGame>()
-                .To<Stub>()
-                .AsSingle();
-        }
+                .Bind<Camera>()
+                .FromMethod(() => Camera.main);
 
-        private class Stub : IGame
-        {
-            public IObservable<Unit> Run(IPlanet planet)
-            {
-                return Observable
-                    .ReturnUnit()
-                    .Delay(TimeSpan.FromSeconds(1));
-            }
+            this.Container
+                .Bind<Ball>()
+                .FromMethod(() => Object.FindObjectOfType<Ball>());
+
+            this.Container
+                .Bind<Input>()
+                .AsSingle();
+
+            this.Container
+                .Bind<IGame>()
+                .To<Game>()
+                .AsSingle();
         }
     }
 }

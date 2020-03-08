@@ -1,11 +1,8 @@
 {
-    "name": "EZBall.Main",
+    "name": "EZBall.Core",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
-        "GUID:be57a1670adae4d4e802a12eef47e40a",
-        "GUID:44c61a32f4a004262b161e69fd4d466a",
-        "GUID:14ce67836a2434583a211a46bee29ad9"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

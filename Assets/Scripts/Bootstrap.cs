@@ -1,16 +1,17 @@
-﻿using EZBall.Game;
+﻿using EZBall.Core;
+using EZBall.Game;
 using EZBall.Main;
 using UniRx;
-using Zenject;
 
-namespace EZBall.Core
+namespace EZBall
 {
     internal class Bootstrap
     {
-        [Inject]
-        private void InjectMeWith(IMain main, IGame game)
+        private Bootstrap(IInit init, IMain main, IGame game)
         {
-            main.Run()
+            init.Done()
+                .Select(_ => main.Run())
+                .Switch()
                 .Do(_ => main.Hide())
                 .Select(game.Run)
                 .Switch()
