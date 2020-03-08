@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EZBall.Settings
 {
-    [CreateAssetMenu(
-        fileName = "Settings",
-        menuName = "Assets/Scripts/Settings/Settings.cs/Settings")]
-    internal class Settings : ScriptableObject
+    internal class Settings : ISettings
     {
-        [SerializeField] internal Planet[] planets;
+        public IReadOnlyCollection<IPlanet> Planets { get; }
+
+        private Settings()
+        {
+            this.Planets = Resources
+                .Load<Planets>("Planets")
+                .list;
+        }
     }
 }

@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3992a1152081e41d0b25a05d99ea8743, type: 3}
-  m_Name: Settings
+  m_Script: {fileID: 11500000, guid: 7404b3aef779a4dd5b04e410bfdb16ae, type: 3}
+  m_Name: Planets
   m_EditorClassIdentifier: 
-  planets: []
+  list:
+  - name: Earth
+  - name: Moon
+  - name: Jupiter

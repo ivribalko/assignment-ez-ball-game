@@ -8,7 +8,7 @@ namespace EZBall.Settings
         {
             this.Container
                 .Bind<ISettings>()
-                .To<SettingsReader>()
+                .To<Settings>()
                 .AsSingle();
         }
     }
