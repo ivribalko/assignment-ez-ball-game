@@ -23,7 +23,7 @@ namespace EZBall.Main
         {
             return this.scenes
                 .Load(Scene.Main)
-                .ContinueWith(this.view
+                .ContinueWith(_ => this.view
                     .Value
                     .OnClick(this.planets));
         }

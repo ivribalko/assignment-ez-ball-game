@@ -6,6 +6,16 @@ namespace EZBall.Core
     {
         public override void InstallBindings()
         {
+            SignalBusInstaller.Install(Container);
+
+            this.Container
+                .DeclareSignal<InitSignal>();
+
+            this.Container
+                .Bind<IInit>()
+                .To<Init>()
+                .AsSingle();
+
             this.Container
                 .Bind<IScenes>()
                 .To<Scenes>()

@@ -18,18 +18,18 @@ namespace EZBall.Core
 
         public IObservable<Unit> Unload(Scene scene)
         {
-            return SceneManager
+            return Observable.Defer(() => SceneManager
                 .UnloadSceneAsync(scene.ToString())
                 .AsObservable()
-                .AsUnitObservable();
+                .AsUnitObservable());
         }
 
         private IObservable<Unit> Load(Scene scene, LoadSceneMode mode)
         {
-            return SceneManager
+            return Observable.Defer(() => SceneManager
                 .LoadSceneAsync(scene.ToString(), mode)
                 .AsObservable()
-                .AsUnitObservable();
+                .AsUnitObservable());
         }
     }
 }

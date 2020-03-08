@@ -16,11 +16,11 @@ namespace EZBall.Game
 
         public IObservable<Unit> Run(IPlanet planet)
         {
-            return Observable
-                .ReturnUnit()
-                .Do(_ => scenes.Add(Scene.Game))
+            return scenes
+                .Add(Scene.Game)
                 .Delay(TimeSpan.FromSeconds(1))
-                .DoOnTerminate(() => scenes.Unload(Scene.Game));
+                .Select(_ => scenes.Unload(Scene.Game))
+                .Switch();
         }
     }
 }
