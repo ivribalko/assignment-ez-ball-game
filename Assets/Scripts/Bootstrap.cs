@@ -3,7 +3,7 @@ using EZBall.Main;
 using UniRx;
 using Zenject;
 
-namespace EZBall.Core
+namespace EZBall
 {
     internal class Bootstrap
     {
