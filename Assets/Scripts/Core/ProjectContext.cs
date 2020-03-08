@@ -1,4 +1,3 @@
-using EZBall.Game;
 using Zenject;
 
 namespace EZBall.Core
@@ -9,9 +8,7 @@ namespace EZBall.Core
         {
             Main.Installer.Install(this.Container);
 
-            this.Container
-                .Bind<IGame>()
-                .FromInstance(null);
+            Game.Installer.Install(this.Container);
 
             Settings.Installer.Install(this.Container);
 
