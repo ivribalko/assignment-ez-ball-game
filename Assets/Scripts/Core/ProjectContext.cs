@@ -1,5 +1,4 @@
 using EZBall.Game;
-using EZBall.Main;
 using Zenject;
 
 namespace EZBall.Core
@@ -8,9 +7,7 @@ namespace EZBall.Core
     {
         public override void InstallBindings()
         {
-            this.Container
-                .Bind<IMain>()
-                .FromInstance(null);
+            Main.Installer.Install(this.Container);
 
             this.Container
                 .Bind<IGame>()
