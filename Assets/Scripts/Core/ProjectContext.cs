@@ -1,6 +1,5 @@
 using EZBall.Game;
 using EZBall.Main;
-using EZBall.Settings;
 using Zenject;
 
 namespace EZBall.Core
@@ -17,9 +16,7 @@ namespace EZBall.Core
                 .Bind<IGame>()
                 .FromInstance(null);
 
-            this.Container
-                .Bind<ISettings>()
-                .FromInstance(null);
+            Settings.Installer.Install(this.Container);
 
             this.Container
                 .Bind<Bootstrap>()
