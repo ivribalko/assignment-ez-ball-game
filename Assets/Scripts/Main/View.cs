@@ -9,7 +9,7 @@ using Zenject;
 
 namespace EZBall.Main
 {
-    internal sealed class View : MonoBehaviour, IView
+    internal class View : MonoBehaviour, IView
     {
         [SerializeField] Transform buttonLayout;
 

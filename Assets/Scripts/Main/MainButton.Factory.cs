@@ -5,9 +5,9 @@ using Zenject;
 
 namespace EZBall.Main
 {
-    internal sealed partial class MainButton
+    internal partial class MainButton
     {
-        internal sealed class Factory : IFactory<string, Transform, IObservable<Unit>>
+        internal class Factory : IFactory<string, Transform, IObservable<Unit>>
         {
             private readonly IFactory<MainButton> prefabFactory;
 

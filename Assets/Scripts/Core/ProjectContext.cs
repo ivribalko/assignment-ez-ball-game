@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 namespace EZBall.Core
@@ -11,6 +12,11 @@ namespace EZBall.Core
             Game.Installer.Install(this.Container);
 
             Settings.Installer.Install(this.Container);
+
+            this.Container
+                .Bind<Canvas>()
+                .FromComponentInHierarchy()
+                .AsSingle();
 
             this.Container
                 .Bind<Bootstrap>()

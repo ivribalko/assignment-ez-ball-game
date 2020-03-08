@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Zenject;
 
 namespace EZBall.Main
@@ -13,7 +14,8 @@ namespace EZBall.Main
 
             this.Container
                 .BindIFactory<View>()
-                .FromComponentInNewPrefabResource("MainView");
+                .FromComponentInNewPrefabResource("MainView")
+                .UnderTransform(_ => this.Container.Resolve<Canvas>().transform);
 
             this.Container
                 .Bind<Lazy<View>>()

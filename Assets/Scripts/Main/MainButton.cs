@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace EZBall.Main
 {
-    internal sealed partial class MainButton : MonoBehaviour
+    internal partial class MainButton : MonoBehaviour
     {
         [SerializeField] private Text text;
         [SerializeField] private Button button;
@@ -18,6 +18,7 @@ namespace EZBall.Main
         internal MainButton SetParent(Transform parent)
         {
             this.transform.SetParent(parent);
+            this.transform.localScale = Vector3.one;
 
             return this;
         }
