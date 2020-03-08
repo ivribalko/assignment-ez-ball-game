@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using EZBall.Rife;
 using EZBall.Settings;
 using UniRx;
@@ -9,19 +10,21 @@ namespace EZBall.Main
 {
     internal class View : MonoBehaviour, IView
     {
-        internal IObservable<IPlanet> OnClick(IReadOnlyCollection<IPlanet> planets)
+        internal IObservable<IPlanet> OnClick(IEnumerable<IPlanet> planets)
         {
-            return Observable.Never<IPlanet>(null);
+            return Observable
+                .Interval(TimeSpan.FromSeconds(3))
+                .Select(_ => planets.First());
         }
 
         public void Hide()
         {
-            throw new NotImplementedException();
+            this.gameObject.SetActive(false);
         }
 
         public void Show()
         {
-            throw new NotImplementedException();
+            this.gameObject.SetActive(true);
         }
     }
 }

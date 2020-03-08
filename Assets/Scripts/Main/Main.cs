@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using EZBall.Settings;
 
 namespace EZBall.Main
@@ -6,17 +7,17 @@ namespace EZBall.Main
     internal class Main : IMain
     {
         private readonly Lazy<View> view;
-        private readonly ISettings settings;
+        private readonly IEnumerable<IPlanet> planets;
 
-        internal Main(Lazy<View> view, ISettings settings)
+        internal Main(Lazy<View> view, IEnumerable<IPlanet> planets)
         {
             this.view = view;
-            this.settings = settings;
+            this.planets = planets;
         }
 
         public IObservable<IPlanet> Run()
         {
-            return this.view.Value.OnClick(this.settings.Planets);
+            return this.view.Value.OnClick(this.planets);
         }
 
         public void Show()

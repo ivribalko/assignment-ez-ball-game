@@ -5,7 +5,7 @@ namespace EZBall.Settings
 {
     internal class Settings : ISettings
     {
-        public IReadOnlyCollection<IPlanet> Planets { get; }
+        public IEnumerable<IPlanet> Planets { get; }
 
         private Settings()
         {
