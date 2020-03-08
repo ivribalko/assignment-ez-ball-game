@@ -16,6 +16,10 @@ namespace EZBall.Game
                 .FromMethod(() => Object.FindObjectOfType<Ball>());
 
             this.Container
+                .Bind<Platform[]>()
+                .FromMethod(() => Object.FindObjectsOfType<Platform>());
+
+            this.Container
                 .Bind<Input>()
                 .AsSingle();
 
