@@ -24,6 +24,10 @@ namespace EZBall.Game
                 .AsSingle();
 
             this.Container
+                .Bind<Background>()
+                .AsSingle();
+
+            this.Container
                 .Bind<Input>()
                 .AsSingle();
 
