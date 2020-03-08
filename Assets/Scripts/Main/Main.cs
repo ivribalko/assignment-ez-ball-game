@@ -5,19 +5,28 @@ namespace EZBall.Main
 {
     internal class Main : IMain
     {
-        public void Hide()
+        private readonly Lazy<View> view;
+        private readonly ISettings settings;
+
+        internal Main(Lazy<View> view, ISettings settings)
         {
-            throw new NotImplementedException();
+            this.view = view;
+            this.settings = settings;
         }
 
         public IObservable<IPlanet> Run()
         {
-            throw new NotImplementedException();
+            return this.view.Value.OnClick(this.settings.Planets);
         }
 
         public void Show()
         {
-            throw new NotImplementedException();
+            this.view.Value.Show();
+        }
+
+        public void Hide()
+        {
+            this.view.Value.Hide();
         }
     }
 }

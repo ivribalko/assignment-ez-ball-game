@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using EZBall.Rife;
 using EZBall.Settings;
+using UniRx;
+using UnityEngine;
 
 namespace EZBall.Main
 {
-    internal class View : IView
+    internal class View : MonoBehaviour, IView
     {
         internal IObservable<IPlanet> OnClick(IReadOnlyCollection<IPlanet> planets)
         {
-            return null;
+            return Observable.Never<IPlanet>(null);
         }
 
         public void Hide()
