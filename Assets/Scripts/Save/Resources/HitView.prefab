@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4705827787496977070}
   - component: {fileID: 8925059565883228224}
   - component: {fileID: 8109667194117155724}
-  - component: {fileID: 4207515307602621373}
+  - component: {fileID: 4446458557087895519}
   m_Layer: 5
   m_Name: HitView
   m_TagString: Untagged
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4207515307602621373
+--- !u!114 &4446458557087895519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7833087239401771113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af13cca03b86d4a11955ec2eb6fe250e, type: 3}
+  m_Script: {fileID: 11500000, guid: 56169201ed5c3436c9e53169bd820fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 6432652880387327308}

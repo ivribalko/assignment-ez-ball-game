@@ -13,17 +13,17 @@ namespace EZBall.Main
                 .FromComponentInNewPrefabResource("MainButton");
 
             this.Container
-                .BindIFactory<View>()
+                .BindIFactory<MainView>()
                 .FromComponentInNewPrefabResource("MainView")
                 .UnderTransform(_ => this.Container.Resolve<Canvas>().transform);
 
             this.Container
-                .Bind<Lazy<View>>()
-                .FromResolveGetter<IFactory<View>>(view => new Lazy<View>(view.Create));
+                .Bind<Lazy<MainView>>()
+                .FromResolveGetter<IFactory<MainView>>(view => new Lazy<MainView>(view.Create));
 
             this.Container
                 .Bind<MainButton.Factory>()
-                .WhenInjectedInto<View>();
+                .WhenInjectedInto<MainView>();
 
             this.Container
                 .Bind<IMain>()

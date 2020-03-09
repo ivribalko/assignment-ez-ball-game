@@ -1,4 +1,4 @@
-namespace EZBall.Core
+namespace EZBall.Rife
 {
     public enum Scene
     {

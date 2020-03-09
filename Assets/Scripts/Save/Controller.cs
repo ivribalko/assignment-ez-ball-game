@@ -5,22 +5,27 @@ using Zenject;
 
 namespace EZBall.Save
 {
-    internal class Runner : IDisposable
+    internal class Controller : IDisposable
     {
+        private readonly HitView view;
         private readonly Storage storage;
         private readonly SignalBus signalBus;
 
         private readonly CompositeDisposable subscriptions = new CompositeDisposable();
 
-        private Runner(
-            View view,
+        private Controller(
+            HitView view,
             Storage storage,
             SignalBus signalBus)
         {
+            this.view = view;
             this.storage = storage;
             this.signalBus = signalBus;
 
+            this.view.Hide();
+
             this.signalBus.Subscribe<HitSignal>(this.Increment);
+            this.signalBus.Subscribe<SceneSignal>(this.Toggle);
 
             this.storage
                 .OnSaved
@@ -34,7 +39,7 @@ namespace EZBall.Save
         public void Dispose()
         {
             this.signalBus.Unsubscribe<HitSignal>(this.Increment);
-
+            this.signalBus.Unsubscribe<SceneSignal>(this.Toggle);
             this.subscriptions.Dispose();
         }
 
@@ -44,6 +49,19 @@ namespace EZBall.Save
             if (saved < int.MaxValue)
             {
                 storage.Save(Keys.Hits, saved + 1);
+            }
+        }
+
+        private void Toggle(SceneSignal scene)
+        {
+            if (scene.SceneOpened == Scene.Main ||
+                scene.SceneClosed == Scene.Game)
+            {
+                this.view.Show();
+            }
+            else
+            {
+                this.view.Hide();
             }
         }
     }

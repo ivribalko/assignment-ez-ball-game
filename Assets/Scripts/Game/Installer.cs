@@ -1,3 +1,4 @@
+using EZBall.Rife;
 using Zenject;
 
 namespace EZBall.Game
@@ -6,6 +7,9 @@ namespace EZBall.Game
     {
         public override void InstallBindings()
         {
+            this.Container
+                .DeclareSignal<HitSignal>();
+
             this.Container
                 .Bind<Input>()
                 .AsSingle();
