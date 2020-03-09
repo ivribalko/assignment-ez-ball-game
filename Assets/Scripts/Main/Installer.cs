@@ -15,7 +15,10 @@ namespace EZBall.Main
             this.Container
                 .BindIFactory<MainView>()
                 .FromComponentInNewPrefabResource("MainView")
-                .UnderTransform(_ => this.Container.Resolve<Canvas>().transform);
+                .UnderTransform(_ => this.Container
+                    .Resolve<Canvas>()
+                    .transform
+                    .Find("Back"));
 
             this.Container
                 .Bind<Lazy<MainView>>()

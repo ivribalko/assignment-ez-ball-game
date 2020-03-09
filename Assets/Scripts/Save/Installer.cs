@@ -10,7 +10,9 @@ namespace EZBall.Save
             this.Container
                 .Bind<HitView>()
                 .FromComponentInNewPrefabResource("HitView")
-                .UnderTransform(_ => this.Container.Resolve<Canvas>().transform)
+                .UnderTransform(_ => this.Container.Resolve<Canvas>()
+                    .transform
+                    .Find("Front"))
                 .AsSingle();
 
             this.Container
