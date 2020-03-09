@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
+using EZBall.Rife;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Zenject;
 
 namespace EZBall.Game
 {
@@ -16,6 +18,7 @@ namespace EZBall.Game
 
         private Runner(
             Platform[] platforms,
+            SignalBus signalBus,
             Camera cam,
             Input input,
             Ball ball)
@@ -23,6 +26,11 @@ namespace EZBall.Game
             this.cam = cam;
             this.input = input;
             this.ball = ball;
+
+            this.ball
+                .OnCollisionEnter2DAsObservable()
+                .Subscribe(_ => signalBus.Fire<HitSignal>())
+                .AddTo(this.subscriptions);
 
             this.input
                 .OnTouch

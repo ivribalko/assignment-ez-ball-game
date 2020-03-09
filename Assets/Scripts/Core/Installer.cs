@@ -1,3 +1,4 @@
+using EZBall.Rife;
 using Zenject;
 
 namespace EZBall.Core
@@ -10,6 +11,9 @@ namespace EZBall.Core
 
             this.Container
                 .DeclareSignal<InitSignal>();
+
+            this.Container
+                .DeclareSignal<SceneSignal>();
 
             this.Container
                 .Bind<IInit>()

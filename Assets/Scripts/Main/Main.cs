@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EZBall.Core;
+using EZBall.Rife;
 using EZBall.Settings;
 using UniRx;
 
@@ -9,10 +10,10 @@ namespace EZBall.Main
     internal class Main : IMain
     {
         private readonly IScenes scenes;
-        private readonly Lazy<View> view;
+        private readonly Lazy<MainView> view;
         private readonly IEnumerable<IPlanet> planets;
 
-        internal Main(Lazy<View> view, IScenes scenes, IEnumerable<IPlanet> planets)
+        internal Main(Lazy<MainView> view, IScenes scenes, IEnumerable<IPlanet> planets)
         {
             this.view = view;
             this.scenes = scenes;
