@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 namespace EZBall.Game
@@ -7,14 +6,6 @@ namespace EZBall.Game
     {
         public override void InstallBindings()
         {
-            this.Container
-                .Bind<Camera>()
-                .FromMethod(() => Camera.main);
-
-            this.Container
-                .Bind<Ball>()
-                .FromMethod(() => Object.FindObjectOfType<Ball>());
-
             this.Container
                 .Bind<Input>()
                 .AsSingle();
