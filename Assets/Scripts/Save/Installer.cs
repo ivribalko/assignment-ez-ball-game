@@ -1,3 +1,4 @@
+using EZBall.Rife;
 using Zenject;
 
 namespace EZBall.Save
@@ -7,11 +8,14 @@ namespace EZBall.Save
         public override void InstallBindings()
         {
             this.Container
+                .DeclareSignal<HitSignal>();
+
+            this.Container
                 .Bind<Storage>()
                 .AsSingle();
 
             this.Container
-                .Bind<Runner>()
+                .BindInterfacesTo<Runner>()
                 .AsSingle()
                 .NonLazy();
         }
