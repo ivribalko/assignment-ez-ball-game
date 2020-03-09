@@ -1,27 +1,23 @@
+using System;
 using EZBall.Settings;
 using UnityEngine;
 
 namespace EZBall.Game
 {
-    internal class Physics
+    internal class Physics : IDisposable
     {
-        Vector2? saved;
+        Vector2 saved;
 
-        internal void Set(IPlanet planet)
+        private Physics(IPlanet planet)
         {
-            if (!saved.HasValue)
-            {
-                this.saved = Physics2D.gravity;
-            }
+            this.saved = Physics2D.gravity;
 
             Physics2D.gravity = planet.Gravity;
         }
 
-        internal void Restore()
+        public void Dispose()
         {
-            Physics2D.gravity = this.saved.Value;
-
-            this.saved = null;
+            Physics2D.gravity = saved;
         }
     }
 }

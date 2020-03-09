@@ -1,19 +1,20 @@
+using System;
 using System.Linq;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Zenject;
 
 namespace EZBall.Game
 {
-    internal class Runner : MonoBehaviour
+    internal class Runner : IDisposable
     {
         private Ball ball;
         private Camera cam;
         private Input input;
 
-        [Inject]
-        private void InjectMeWith(
+        private readonly CompositeDisposable subscriptions = new CompositeDisposable();
+
+        private Runner(
             Platform[] platforms,
             Camera cam,
             Input input,
@@ -30,7 +31,7 @@ namespace EZBall.Game
                 .Select(direction => new Vector3(direction.x, direction.y, 0f))
                 .Select(direction => direction.normalized)
                 .Subscribe(this.MoveBall)
-                .AddTo(this);
+                .AddTo(this.subscriptions);
 
             platforms
                 .Select(item => item
@@ -40,7 +41,12 @@ namespace EZBall.Game
                     .Select(_ => item))
                 .Merge()
                 .Subscribe(this.Colorize)
-                .AddTo(this);
+                .AddTo(this.subscriptions);
+        }
+
+        public void Dispose()
+        {
+            this.subscriptions.Dispose();
         }
 
         private void MoveBall(Vector3 direction)
@@ -52,7 +58,7 @@ namespace EZBall.Game
 
         private void Colorize(Platform platform)
         {
-            platform.Set(Random.ColorHSV());
+            platform.Set(UnityEngine.Random.ColorHSV());
         }
     }
 }

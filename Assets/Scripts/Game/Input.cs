@@ -7,7 +7,7 @@ namespace EZBall.Game
     internal class Input
     {
         /// <summary>
-        /// Emit while screen is touched. 
+        /// Emit mousePosition while screen is touched. 
         /// </summary>
         internal IObservable<Vector3> OnTouch => Observable
             .EveryUpdate()

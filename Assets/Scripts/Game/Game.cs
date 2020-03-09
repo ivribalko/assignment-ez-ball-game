@@ -3,6 +3,7 @@ using EZBall.Core;
 using EZBall.Settings;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace EZBall.Game
 {
@@ -10,32 +11,32 @@ namespace EZBall.Game
     {
         private readonly Input input;
         private readonly IScenes scenes;
-        private readonly Physics physics;
-        private readonly Background background;
+        private readonly DiContainer container;
 
         public Game(
-            Background background,
-            Physics physics,
+            DiContainer container,
             IScenes scenes,
             Input input)
         {
-            this.background = background;
-            this.physics = physics;
-            this.scenes = scenes;
             this.input = input;
+            this.scenes = scenes;
+            this.container = container;
         }
 
         public IObservable<Unit> Run(IPlanet planet)
         {
-            return scenes.Add(Scene.Game)
-                .Select(_ => planet)
-                .Do(this.physics.Set)
-                .Do(this.background.Set)
-                .ContinueWith(this.input.OnBack.Take(1))
-                .DoOnError(Debug.LogException)
-                .CatchIgnore()
-                .DoOnTerminate(physics.Restore)
-                .ContinueWith(scenes.Unload(Scene.Game));
+            return Observable.Defer(() =>
+            {
+                this.container.BindInstance(planet);
+
+                return scenes.Add(Scene.Game)
+                    .ContinueWith(this.input.OnBack.Take(1))
+                    .DoOnError(Debug.LogException)
+                    .CatchIgnore()
+                    .DoOnTerminate(() => this.container.Unbind<IPlanet>())
+                    .ContinueWith(scenes.Unload(Scene.Game));
+            });
+
         }
     }
 }

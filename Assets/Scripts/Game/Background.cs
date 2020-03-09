@@ -5,16 +5,9 @@ namespace EZBall.Game
 {
     internal class Background
     {
-        private readonly Camera camera;
-
-        private Background(Camera camera)
+        private Background(Camera camera, IPlanet planet)
         {
-            this.camera = camera;
-        }
-
-        internal void Set(IPlanet planet)
-        {
-            this.camera.backgroundColor = planet.Color;
+            camera.backgroundColor = planet.Color;
         }
     }
 }
