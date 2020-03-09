@@ -13,6 +13,8 @@ namespace EZBall
 
             Game.Installer.Install(this.Container);
 
+            Save.Installer.Install(this.Container);
+
             Settings.Installer.Install(this.Container);
 
             this.Container
