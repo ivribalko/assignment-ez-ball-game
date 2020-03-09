@@ -3,7 +3,7 @@ using Zenject;
 
 namespace EZBall.Game
 {
-    internal sealed class SceneInstaller : MonoInstaller<SceneInstaller>
+    internal class SceneInstaller : MonoInstaller<SceneInstaller>
     {
         [SerializeField] Ball ball;
         [SerializeField] Camera cam;
